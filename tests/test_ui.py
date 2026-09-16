@@ -28,5 +28,5 @@ def test_decimal_point_is_limited_to_each_number() -> None:
     for value in "1.2.3+4.5.6":
         ui._append_to_input(value)
 
-    assert ui.current_input == "1.2+4.5"
-    assert ui.display_var.value == "1.2+4.5"
+    assert ui.current_input == "1.23+4.56"
+    assert ui.display_var.value == "1.23+4.56"
