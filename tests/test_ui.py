@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 from ui import CalculatorUI
 
 
@@ -30,3 +32,15 @@ def test_decimal_point_is_limited_to_each_number() -> None:
 
     assert ui.current_input == "1.23+4.56"
     assert ui.display_var.value == "1.23+4.56"
+
+
+def test_keyboard_equals_calculates() -> None:
+    ui = CalculatorUI.__new__(CalculatorUI)
+    ui.current_input = "2+3"
+    ui.calculate = lambda: setattr(ui, "calculated", True)
+
+    result = ui._on_key_press(SimpleNamespace(char="=", keysym="equal"))
+
+    assert result == "break"
+    assert ui.calculated is True
+    assert ui.current_input == "2+3"

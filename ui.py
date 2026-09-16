@@ -259,6 +259,10 @@ class CalculatorUI:
         char = event.char
         keysym = event.keysym
 
+        if char == "=":
+            self.calculate()
+            return "break"
+
         if char.isdigit() or char in {"+", "-", "*", "/", ".", "(" , ")"}:
             self._append_to_input(char)
             return "break"
