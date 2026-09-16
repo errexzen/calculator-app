@@ -339,6 +339,9 @@ class CalculatorUI:
             messagebox.showerror("Unexpected Error", "Something went wrong. Please try again.")
 
     def _format_decimal(self, value: Decimal) -> str:
+        if value == 0:
+            return "0"
+
         normalized = value.normalize()
         text = format(normalized, "f")
         if "." in text:

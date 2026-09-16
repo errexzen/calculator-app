@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+from decimal import Decimal
 
 from ui import CalculatorUI
 
@@ -44,3 +45,9 @@ def test_keyboard_equals_calculates() -> None:
     assert result == "break"
     assert ui.calculated is True
     assert ui.current_input == "2+3"
+
+
+def test_format_decimal_normalizes_negative_zero() -> None:
+    ui = CalculatorUI.__new__(CalculatorUI)
+
+    assert ui._format_decimal(Decimal("-0.00")) == "0"
