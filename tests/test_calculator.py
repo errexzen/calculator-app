@@ -32,6 +32,15 @@ def test_divide_by_zero_raises() -> None:
         assert True
 
 
+def test_expression_divide_by_zero_raises() -> None:
+    calc = Calculator()
+    try:
+        calc.evaluate_expression("10 / 0")
+        assert False, "Expected DivisionByZeroError"
+    except DivisionByZeroError:
+        assert True
+
+
 def test_evaluate_expression() -> None:
     calc = Calculator()
     assert calc.evaluate_expression("-5+2*4") == Decimal("3")
