@@ -298,6 +298,13 @@ class CalculatorUI:
         self._append_to_input(value)
 
     def _append_to_input(self, value: str) -> None:
+        if value == ".":
+            current_number = self.current_input
+            for operator in "+-*/()":
+                current_number = current_number.rsplit(operator, 1)[-1]
+            if "." in current_number:
+                return
+
         self.current_input += value
         self.display_var.set(self.current_input)
 
