@@ -49,6 +49,9 @@ class Calculator:
 
         Supported operators: +, -, *, / and unary +/-.
         """
+        if not isinstance(expression, str):
+            raise InvalidExpressionError("Expression must be text.")
+
         cleaned_expression = expression.strip().replace("×", "*").replace("÷", "/")
         if not cleaned_expression:
             raise InvalidExpressionError("Expression is empty.")
@@ -58,7 +61,14 @@ class Calculator:
             return self._eval_node(tree.body)
         except DivisionByZeroError:
             raise
-        except (SyntaxError, TypeError, ValueError, InvalidOperation, DivisionByZero) as exc:
+        except (
+            SyntaxError,
+            TypeError,
+            ValueError,
+            InvalidOperation,
+            DivisionByZero,
+            OverflowError,
+        ) as exc:
             raise InvalidExpressionError("Invalid calculation.") from exc
 
     def _eval_node(self, node: ast.AST) -> Decimal:

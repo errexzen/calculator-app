@@ -44,3 +44,12 @@ def test_invalid_expression_raises() -> None:
         assert False, "Expected InvalidExpressionError"
     except InvalidExpressionError:
         assert True
+
+
+def test_unexpected_expression_input_raises() -> None:
+    calc = Calculator()
+    try:
+        calc.evaluate_expression(None)  # type: ignore[arg-type]
+        assert False, "Expected InvalidExpressionError"
+    except InvalidExpressionError:
+        assert True
